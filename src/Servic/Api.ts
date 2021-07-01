@@ -18,22 +18,22 @@ interface IUseApiResponse<T>{
 }
 
 
-export const useApiGet = <T extends {}>(url:string , params?:any):IUseApiResponse<T>=>{
+export const useApiGet = <T extends {}>(url:string , urlParams?:any,params?:{}):IUseApiResponse<T>=>{
     const [data,setData]=useState<T|null>(null);
     const [loading,setLoading] = useState(false);
     const [error,setError] = useState(null);
-    const [config,setConfig] = useState<AxiosRequestConfig>({method: 'get', url:url});
+    const [config,setConfig] = useState<AxiosRequestConfig>({method: 'get', url:urlParams?url+urlParams:url,params:params});
 
     const fetchData= async (conf:AxiosRequestConfig) =>{
         setLoading(true);
         try{
             const res = await Api(conf) 
-            setData((res.data.value||res.data) as T);
+            setData((res.data.value || res.data) as T);
 
         }catch(error){
             setError(error.toString());
         }finally{
-            setLoading(true);
+            setLoading(false);
         }
     }
     // const findUsers = (param:string)=>{
@@ -44,5 +44,5 @@ export const useApiGet = <T extends {}>(url:string , params?:any):IUseApiRespons
         fetchData(config);
     },[config]);
 
-    return {data,loading,error};
+    return {data,loading,error,setData};
 }

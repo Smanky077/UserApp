@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import User from '../Models/User';
 import axios from 'axios';
 
-import { apiConfig } from '../Servic/Api';
+import { apiConfig, useApiGet } from '../Servic/Api';
 import { SearchTable } from '../Components/SearchTable';
 import { TextField } from '../Components/TextField';
 import { Button, ButtonConteiner } from '../Styles/TextStyledComponent';
 import { Loading } from '../Utils/Loading';
+import { BirthdayComponent } from '../Components/BirthDay/BirthdayComponent';
 
-export const Users: React.FunctionComponent = () => {
+export const Users = () => {
    const [param, setParam] = useState('');
    const [data, setData] = useState<User[] | null>(null);
    const [loading, setLoad] = useState(false);
+
    const Find = async () => {
       setLoad(true);
       try {
@@ -34,7 +36,7 @@ export const Users: React.FunctionComponent = () => {
          <h1>Телефонный справочник</h1>
          <div style={{ display: 'flex' }}>
             <TextField
-               onKeyPress={(e) => (e.key === 'Enter' ? Find : null)}
+               onKeyPress={(e) => (e.key === 'Enter' ? Find() : null)}
                placeholder="Введите ФИО/подразделение/телефон"
                type="text"
                value={param}
@@ -52,6 +54,7 @@ export const Users: React.FunctionComponent = () => {
                <SearchTable items={data}></SearchTable>
             </div>
          </Loading>
+         <BirthdayComponent />
       </div>
    );
 };

@@ -29,3 +29,7 @@ export const Button = styled.button`
 export const ButtonConteiner = styled.div`
    margin-left: 10px;
 `;
+export const ButtonsWrapper = styled.div`
+   margin-top: 10px;
+   display: flex;
+`;

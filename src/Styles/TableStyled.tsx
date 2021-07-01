@@ -19,7 +19,7 @@ export const TrTag = styled.tr`
 `;
 
 export const TdTag = styled.td<iProps>`
-   padding: 6px 2px;
+   padding: 6px 4px;
    word-wrap: break-word;
    ${(props) => (props.prop ? 'text-align:' + props.prop : null)};
 `;

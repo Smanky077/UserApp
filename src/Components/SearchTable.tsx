@@ -13,20 +13,24 @@ interface ITableProps {
 export const SearchTable: FunctionComponent<ITableProps> = ({ items }) => {
    const body = () => {
       if (items === null) {
-         return <div>Не найдено</div>;
+         return (
+            <tr>
+               <td colSpan={6}>Не найдено</td>
+            </tr>
+         );
       }
       return items.map((item) => {
          return (
             <TrTag key={item.id}>
-               <TdTag>
-                  <img src={item.photo} />
+               <TdTag prop="center">
+                  <img style={{ width: '100px' }} src={item.photo || '/noPhoto.png'} />
                </TdTag>
                <TdTag prop="center">
                   <StyledLink to={`/ViewUser/${item.id}`}>{item.name}</StyledLink>
                </TdTag>
                <TdTag>{item.position}</TdTag>
                <TdTag>{item.department}</TdTag>
-               <TdTag>{item.email}</TdTag>
+               <TdTag prop="center">{item.email}</TdTag>
                <TdTag prop="center">{item.extPhone}</TdTag>
             </TrTag>
          );
@@ -36,6 +40,9 @@ export const SearchTable: FunctionComponent<ITableProps> = ({ items }) => {
    return (
       <div style={{ maxWidth: '1300px', marginTop: '20px', display: items === null ? 'none' : 'block' }}>
          <Table>
+            <colgroup>
+               <col style={{ width: '130px' }} span={1} />
+            </colgroup>
             <Theader>
                <tr>
                   <th>Фото</th>

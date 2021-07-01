@@ -1,6 +1,8 @@
 
 export default class User{
 		public absent:boolean = false;
+
+		public absentTime:string = "";
         
 		public bkCreated:Date|null = null;
 
@@ -32,7 +34,7 @@ export default class User{
 		
 		public  id = "";
 
-		public  locationFloor?:Number;
+		public  locationFloor?:string;
 		
 		public  locationLink:string = "";
 		
@@ -65,4 +67,6 @@ export default class User{
         public  pkziDate :string = "";
         
         public  pkziStatus :string = "";
+
+		public  birthday :string ="";
 } 
