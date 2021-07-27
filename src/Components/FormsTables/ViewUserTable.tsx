@@ -1,8 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { Table, TdTag, TrTag, Theader } from '../Styles/TableStyled';
-import User from '../Models/User';
-import { Rand } from '../Utils/Helpers';
+import { Table, TdTag, TrTag, Theader } from '../../Styles/TableStyled';
+import User from '../../Models/User';
+import { Rand } from '../../Utils/Helpers';
+import { EditIcon, UserMarker } from '../../Styles/IconStyled';
+import { StyledLink } from '../../Styles/Styled';
+import { useCheck } from '../../Utils/Contexts';
 
 interface IProps {
    item: User | null;
@@ -28,14 +31,18 @@ export const ViewUserTable: FunctionComponent<IProps> = ({ item }) => {
       { name: 'Расположение(Адрес)', nameItem: item?.locationFloor },
       { name: 'Карта', nameItem: item?.locationFloor },
    ];
+   const Check = useCheck();
+   const CurUser = Check.user?.email === item?.email ? true : false;
+   const location = item?.locationPlace ? item?.locationPlace.split(',') : ['0', '0'];
+
    const body = () => {
       return names.map((name) => {
          if (name.name === 'Карта' && name.nameItem) {
             return (
                <TrTag key={Rand()}>
                   <TdTag colSpan={2}>
-                     <div id="userMarker" />
-                     <img src={`/SiteAssets/FloorPlan/${name.nameItem}.jpg?id=${Rand()}`} width="1000px"></img>
+                     <UserMarker locatinPlace={item?.locationPlace} top={location && location[1]} left={location && location[0]} />
+                     <img alt="План этажа" src={`/SiteAssets/FloorPlan/${name.nameItem}.jpg?id=${Rand()}`} width="1000px"></img>
                   </TdTag>
                </TrTag>
             );
@@ -50,13 +57,23 @@ export const ViewUserTable: FunctionComponent<IProps> = ({ item }) => {
          }
       });
    };
+   const EditLink = () => {
+      if (CurUser || Check.isModder) {
+         return (
+            <StyledLink to={`/EditeUser/${item && item.id}`}>
+               <EditIcon />
+            </StyledLink>
+         );
+      }
+      return <></>;
+   };
+
    return (
       <Table>
          <Theader>
             <tr>
-               <th colSpan={2} style={{ textAlign: 'left' }}>
-                  Карточка сотрудника - {item && item.name}
-               </th>
+               <th style={{ textAlign: 'left' }}>Карточка сотрудника - {item && item.name}</th>
+               <th style={{ textAlign: 'right' }}>{EditLink()}</th>
             </tr>
          </Theader>
          <tbody>{body()}</tbody>

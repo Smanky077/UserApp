@@ -11,9 +11,9 @@ export const BirthdayComponent = () => {
    const today = GetDayMonth(new Date().toLocaleDateString());
    const yesterday = GetDayMonth(new Date(new Date().setDate(new Date().getDate() - 1)).toLocaleDateString());
    const tomorrow = GetDayMonth(new Date(new Date().setDate(new Date().getDate() + 1)).toLocaleDateString());
-   const todayBirthUsers = useApiGet<User[]>('/_vti_bin/UsersEndPoint.svc/users', null, { parameters: { birthday: today } });
-   const yesterdayBirthUsers = useApiGet<User[]>('/_vti_bin/UsersEndPoint.svc/users', null, { parameters: { birthday: yesterday } });
-   const tomorrowBirthUsers = useApiGet<User[]>('/_vti_bin/UsersEndPoint.svc/users', null, { parameters: { birthday: tomorrow } });
+   const todayBirthUsers = useApiGet<User[]>('/_vti_bin/UsersEndPoint.svc/users', null, { parameters: { birthday: today } }, []);
+   const yesterdayBirthUsers = useApiGet<User[]>('/_vti_bin/UsersEndPoint.svc/users', null, { parameters: { birthday: yesterday } }, []);
+   const tomorrowBirthUsers = useApiGet<User[]>('/_vti_bin/UsersEndPoint.svc/users', null, { parameters: { birthday: tomorrow } }, []);
    return (
       <div style={{ width: '800px' }}>
          <h3>Дни рождения</h3>

@@ -13,3 +13,7 @@ export const Rand = ()=>{
     const secondPartStr = ('000' + secondPart.toString(36)).slice(-3);
     return firstPartStr + secondPartStr;
 }
+
+export const GoBack = (history: any) => {
+    history.length ? history.goBack() : history.push('/');
+ };

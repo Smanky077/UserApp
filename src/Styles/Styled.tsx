@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+interface ILinkBut {
+   curuser: number;
+   ismodder?: number | null | undefined;
+}
+
 export const StyledLink = styled(Link)`
    color: #000;
    font-weight: 600;
@@ -9,9 +14,9 @@ export const StyledLink = styled(Link)`
    }
 `;
 
-export const ButtonLink = styled(Link)`
+export const ButtonLink = styled(Link)<ILinkBut>`
    color: #000;
-   display:inline-block;
+   display:${(props) => (props.curuser === 1 || props.ismodder === 1 ? 'inline-block' : 'none')};
    text-decoration: none;
    font: inherit;
    border: 1px solid #ead08e;

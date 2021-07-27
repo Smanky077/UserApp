@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import User from '../Models/User';
-import { Table, TdTag, TrTag, Theader } from '../Styles/TableStyled';
-import { StyledLink } from '../Styles/Styled';
+import User from '../../Models/User';
+import { Table, TdTag, TrTag, Theader } from '../../Styles/TableStyled';
+import { StyledLink } from '../../Styles/Styled';
 
 interface ITableProps {
    items: User[] | null;
@@ -23,12 +23,12 @@ export const SearchTable: FunctionComponent<ITableProps> = ({ items }) => {
          return (
             <TrTag key={item.id}>
                <TdTag prop="center">
-                  <img style={{ width: '100px' }} src={item.photo || '/noPhoto.png'} />
+                  <img style={{ width: '100px' }} src={item.photo || '/SiteCollectionDocuments/userAppNew/noPhoto.png'} />
                </TdTag>
                <TdTag prop="center">
                   <StyledLink to={`/ViewUser/${item.id}`}>{item.name}</StyledLink>
                </TdTag>
-               <TdTag>{item.position}</TdTag>
+               <TdTag prop="center">{item.position}</TdTag>
                <TdTag>{item.department}</TdTag>
                <TdTag prop="center">{item.email}</TdTag>
                <TdTag prop="center">{item.extPhone}</TdTag>
@@ -38,7 +38,7 @@ export const SearchTable: FunctionComponent<ITableProps> = ({ items }) => {
    };
 
    return (
-      <div style={{ maxWidth: '1300px', marginTop: '20px', display: items === null ? 'none' : 'block' }}>
+      <div style={{ marginTop: '20px', display: items === null ? 'none' : 'block' }}>
          <Table>
             <colgroup>
                <col style={{ width: '130px' }} span={1} />

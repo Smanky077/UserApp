@@ -2,9 +2,9 @@ import { useState } from 'react';
 import User from '../Models/User';
 import axios from 'axios';
 
-import { apiConfig, useApiGet } from '../Servic/Api';
-import { SearchTable } from '../Components/SearchTable';
-import { TextField } from '../Components/TextField';
+import { apiConfig } from '../Servic/Api';
+import { SearchTable } from '../Components/FormsTables/SearchTable';
+import { SearchTextField } from '../Components/SearchTextField';
 import { Button, ButtonConteiner } from '../Styles/TextStyledComponent';
 import { Loading } from '../Utils/Loading';
 import { BirthdayComponent } from '../Components/BirthDay/BirthdayComponent';
@@ -35,7 +35,7 @@ export const Users = () => {
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
          <h1>Телефонный справочник</h1>
          <div style={{ display: 'flex' }}>
-            <TextField
+            <SearchTextField
                onKeyPress={(e) => (e.key === 'Enter' ? Find() : null)}
                placeholder="Введите ФИО/подразделение/телефон"
                type="text"
